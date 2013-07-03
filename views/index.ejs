@@ -44,6 +44,18 @@
 		playerCount = 0;
 	}
 
+  // Post score to server
+  function postScore(score) {
+    $.ajax({
+      url: "/",
+      type: "POST",
+      data: score,
+      context: document.body
+    }).done(function() {
+      console.log("postScore AJAX success..")
+    });
+  }
+
 	//this will indicate to the user what buttons to push
 	function playButtons(){
 		isPlaying = true;
@@ -100,6 +112,7 @@
 					playButtons();
 				}
 			} else {
+        console.log("Sorry...")
 				resetGame();
 			}
 		})
