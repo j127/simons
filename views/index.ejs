@@ -21,6 +21,7 @@
 	var playerCount = 0;
 	var currentRound = 1;
 	var highScore = 1;
+  var score = {};
 
 	function incrementSteps(){
 		var number = Math.ceil(Math.random()*4);
@@ -30,6 +31,9 @@
 	}
 
 	function resetGame(){
+    // Send the score to the server before restarting
+    postScore(score)
+
 		$('.startDiv').show();
 		$('.gameDiv').hide();
 
@@ -46,13 +50,16 @@
 
   // Post score to server
   function postScore(score) {
+    var game = JSON.stringify(score);
+    console.log("About to send...");
     $.ajax({
       url: "/",
       type: "POST",
-      data: score,
-      context: document.body
-    }).done(function() {
-      console.log("postScore AJAX success..")
+      dataType: "json",
+      data: game
+    }).done(function(msg) {
+      console.log("Data saved: " + msg);
+      alert("Data saved: " + msg);
     });
   }
 
@@ -108,11 +115,17 @@
 				$('embed').remove();
     	    	$('body').append('<embed src="'+$(this).attr('id')+'.mp3" autostart="true" hidden="true" loop="false">');
 				if(playerCount >= steps.length){
+          score = playerCount;
 					playerCount = 0;
 					playButtons();
 				}
 			} else {
-        console.log("Sorry...")
+        score = {
+          "name": "Bob",
+          "score": 5
+        }
+        console.log("Sorry...");
+        console.log("Sending score: " + score);
 				resetGame();
 			}
 		})

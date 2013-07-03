@@ -21,6 +21,7 @@ db.open(function(err, db) {
 
 exports.addScore = function(req, res) {
   var score = req.body;
+  console.log("Received: " + score);
   console.log('Adding score: ' + JSON.stringify(score));
   db.collection('scores', function(err, collection) {
     collection.insert(score, {safe:true}, function(err, result) {
@@ -33,3 +34,4 @@ exports.addScore = function(req, res) {
     });
   });
 }
+
