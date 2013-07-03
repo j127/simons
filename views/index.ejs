@@ -24,8 +24,9 @@
 
 	function incrementSteps(){
 		var number = Math.ceil(Math.random()*4);
-		console.log(number);
+		console.log("var number = " + number);
 		steps.push(number+"btn");
+    console.log("steps: " + steps);
 	}
 
 	function resetGame(){
@@ -54,14 +55,14 @@
 		var count = 0;
 		var int = setInterval(function(){
 			var btn = steps[count];
-			console.log(btn);
+			console.log("btn = " + btn);
 
 			$('embed').remove();
     	    $('body').append('<embed src="'+btn+'.mp3" autostart="true" hidden="true" loop="false">');
 			$('#'+btn).animate({
 			    opacity: 1
 			  }, 250, function() {
-			    $('#'+btn).css('opacity', .75);
+          $('#'+btn).css({ 'opacity': 0.50, 'border':'1px solid yellow' });
 			  });
 
 			count++;
