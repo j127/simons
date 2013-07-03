@@ -22,7 +22,7 @@ db.open(function(err, db) {
 exports.addScore = function(req, res) {
   var score = req.body;
   console.log("Received: " + score);
-  console.log('Adding score: ' + JSON.stringify(score));
+  console.log('Adding score: ' + score);
   db.collection('scores', function(err, collection) {
     collection.insert(score, {safe:true}, function(err, result) {
       if(err) {

@@ -50,16 +50,17 @@
 
   // Post score to server
   function postScore(score) {
-    var game = JSON.stringify(score);
-    console.log("About to send...");
+    j = JSON.stringify(score);
+    console.log("About to send..." + j);
     $.ajax({
       url: "/",
       type: "POST",
       dataType: "json",
-      data: game
+      data: score
     }).done(function(msg) {
-      console.log("Data saved: " + msg);
-      alert("Data saved: " + msg);
+      k = JSON.stringify(msg);
+      console.log("Data saved: " + k);
+      alert("Data saved: " + k);
     });
   }
 
@@ -109,23 +110,25 @@
 				return;
 			}
 
+      var finalScore = playerCount;
+      console.log(playerCount);
 			if($(this).attr('id') == steps[playerCount]){
 				console.log($(this).attr('id'));
 				playerCount++;
 				$('embed').remove();
     	    	$('body').append('<embed src="'+$(this).attr('id')+'.mp3" autostart="true" hidden="true" loop="false">');
 				if(playerCount >= steps.length){
-          score = playerCount;
 					playerCount = 0;
 					playButtons();
 				}
 			} else {
         score = {
-          "name": "Bob",
-          "score": 5
+          name: "Bob",
+          score: finalScore
         }
-        console.log("Sorry...");
-        console.log("Sending score: " + score);
+        console.log("Sorry... Game over");
+        p = JSON.stringify(score);
+        console.log("Sending score: " + p);
 				resetGame();
 			}
 		})
