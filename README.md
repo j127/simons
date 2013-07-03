@@ -1,4 +1,4 @@
-simonsays
+Simon
 =========
 
-memory game
+Playing around with some node.js code.
